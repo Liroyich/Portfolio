@@ -1,0 +1,175 @@
+---
+import Base from "../layouts/Base.astro";
+import CaseRow from "../components/CaseRow.astro";
+import {
+  site,
+  hero,
+  ticker,
+  cases,
+  capabilities,
+  process,
+  about,
+  elsewhere,
+  titleBlock,
+} from "../data/site.js";
+
+const links = elsewhere.filter((l) => l.url);
+const year = new Date().getFullYear();
+const today = new Date().toISOString().slice(0, 10);
+---
+
+<Base>
+  <header class="topbar">
+    <div class="topbar-in">
+      <div class="wordmark">{site.name}</div>
+      <div class="status">
+        <span class="dot" aria-hidden="true"></span>{site.availability}
+      </div>
+    </div>
+  </header>
+
+  <main class="sheet">
+    <section class="hero" aria-labelledby="h1">
+      <p class="eyebrow">
+        {hero.eyebrow.map((part, i) => (
+          <>
+            {i > 0 && <span> / </span>}
+            {part}
+          </>
+        ))}
+      </p>
+
+      <h1 id="h1">
+        {hero.headline.map((l, i) => (
+          <span class="line">
+            <i>{i === hero.headline.length - 1 ? <em>{l}</em> : l}</i>
+          </span>
+        ))}
+      </h1>
+
+      <p class="lede">{hero.lede}</p>
+
+      <div class="hero-meta">
+        {hero.meta.map((m) => (
+          <span>{m.label} <b>{m.value}</b></span>
+        ))}
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track" id="ticker">
+        {ticker.map((t) => <span>{t}</span>)}
+      </div>
+    </div>
+
+    <section id="work" aria-labelledby="work-h">
+      <div class="sec-head">
+        <span class="ref">A-01</span>
+        <h2 id="work-h">Selected work</h2>
+        <span class="sec-note">{cases.length} projects</span>
+      </div>
+      <div class="work">
+        {cases.map((item) => <CaseRow item={item} />)}
+      </div>
+    </section>
+
+    <section id="caps" aria-labelledby="caps-h">
+      <div class="sec-head">
+        <span class="ref">A-02</span>
+        <h2 id="caps-h">What I take on</h2>
+        <span class="sec-note">Fixed scope · fixed price</span>
+      </div>
+      <div class="caps">
+        {capabilities.map((c) => (
+          <div class="cap">
+            <span class="ref">{c.no}</span>
+            <h3>{c.title}</h3>
+            <p>{c.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="process" aria-labelledby="process-h">
+      <div class="sec-head">
+        <span class="ref">A-03</span>
+        <h2 id="process-h">How a project runs</h2>
+        <span class="sec-note">Typical: 3 weeks</span>
+      </div>
+      <ol class="steps">
+        {process.map((s) => (
+          <li class="step">
+            <span class="step-no">{s.no}</span>
+            <div>
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+            </div>
+            <span class="step-dur">{s.duration}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section id="about" aria-labelledby="about-h">
+      <div class="sec-head">
+        <span class="ref">A-04</span>
+        <h2 id="about-h">About</h2>
+      </div>
+      <div class="about-grid">
+        <div>
+          {about.paragraphs.map((p) => <p>{p}</p>)}
+        </div>
+        <ul class="facts">
+          {about.facts.map((f) => (
+            <li><span>{f.label}</span><b>{f.value}</b></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="contact-h">
+      <span class="ref">A-05</span>
+      <h2 id="contact-h">Tell me what you're launching.</h2>
+      <p class="lede">
+        Send the deadline, the rough scope and a link to anything that exists.
+        You get a written scope and a price back within two working days.
+      </p>
+
+      <div class="mailbox">
+        <span class="mail" id="mail">{site.email}</span>
+        <button class="copy" id="copy" type="button">Copy</button>
+      </div>
+
+      {links.length > 0 && (
+        <div class="elsewhere">
+          {links.map((l) => (
+            <a href={l.url} target="_blank" rel="noopener">{l.label}</a>
+          ))}
+        </div>
+      )}
+    </section>
+  </main>
+
+  <footer class="sheet">
+    <div class="titleblock">
+      <div class="tb"><span>Sheet</span><b>{titleBlock.sheet}</b></div>
+      <div class="tb"><span>Drawn by</span><b>{titleBlock.drawnBy}</b></div>
+      <div class="tb"><span>Revision</span><b>{titleBlock.revision}</b></div>
+      <div class="tb"><span>Date</span><b>{today}</b></div>
+      <div class="tb"><span>Scale</span><b>{titleBlock.scale}</b></div>
+    </div>
+    <p class="colophon">
+      Built with Astro, GSAP and Lenis · © {year} {site.name}
+    </p>
+  </footer>
+
+  <aside class="readout" aria-hidden="true">
+    <b id="ro-ref">A-01</b>
+    <span id="ro-pct">000%</span>
+    <span class="readout-bar"><i id="ro-bar"></i></span>
+  </aside>
+
+  <script>
+    import "../scripts/motion.js";
+  </script>
+</Base>

@@ -1,0 +1,60 @@
+---
+// Абстрактный вайрфрейм — рисуется, пока нет настоящего скриншота.
+const { kind = "corporate", label = "Project wireframe" } = Astro.props;
+---
+
+<svg class="schematic" viewBox="0 0 170 104" role="img" aria-label={label}>
+  {kind === "hero-globe" && (
+    <g>
+      <rect class="stroke" x="0.5" y="0.5" width="169" height="103" />
+      <rect class="fill" x="1" y="1" width="168" height="52" />
+      <circle class="hi" cx="118" cy="27" r="18" />
+      <rect class="hi" x="12" y="18" width="52" height="5" />
+      <rect class="fill" x="12" y="28" width="38" height="4" />
+      <rect class="stroke" x="12" y="63" width="44" height="28" />
+      <rect class="stroke" x="63" y="63" width="44" height="28" />
+      <rect class="stroke" x="114" y="63" width="44" height="28" />
+    </g>
+  )}
+
+  {kind === "corporate" && (
+    <g>
+      <rect class="stroke" x="0.5" y="0.5" width="169" height="103" />
+      <rect class="hi" x="1" y="1" width="168" height="9" />
+      <rect class="fill" x="1" y="10" width="168" height="34" />
+      <rect class="stroke" x="10" y="18" width="150" height="18" />
+      <rect class="fill" x="10" y="52" width="46" height="22" />
+      <rect class="fill" x="62" y="52" width="46" height="22" />
+      <rect class="fill" x="114" y="52" width="46" height="22" />
+      <rect class="stroke" x="10" y="82" width="150" height="12" />
+    </g>
+  )}
+
+  {kind === "app" && (
+    <g>
+      <rect class="stroke" x="0.5" y="0.5" width="169" height="103" />
+      <rect class="fill" x="1" y="1" width="34" height="102" />
+      <rect class="hi" x="7" y="9" width="22" height="4" />
+      <rect class="stroke" x="43" y="10" width="36" height="20" />
+      <rect class="stroke" x="85" y="10" width="36" height="20" />
+      <rect class="hi" x="127" y="10" width="33" height="20" />
+      <rect class="stroke" x="43" y="40" width="117" height="54" />
+      <rect class="fill" x="43" y="40" width="117" height="10" />
+    </g>
+  )}
+
+  {kind === "variants" && (
+    <g>
+      <rect class="stroke" x="0.5" y="0.5" width="82" height="103" />
+      <rect class="fill" x="1" y="1" width="81" height="40" />
+      <rect class="hi" x="9" y="14" width="40" height="5" />
+      <rect class="stroke" x="9" y="50" width="64" height="20" />
+      <rect class="stroke" x="9" y="76" width="64" height="18" />
+      <rect class="stroke" x="87.5" y="0.5" width="82" height="103" />
+      <rect class="fill" x="88" y="1" width="81" height="26" />
+      <circle class="hi" cx="128" cy="14" r="8" />
+      <rect class="stroke" x="96" y="36" width="64" height="26" />
+      <rect class="stroke" x="96" y="68" width="64" height="26" />
+    </g>
+  )}
+</svg>

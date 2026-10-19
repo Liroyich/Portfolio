@@ -1,0 +1,40 @@
+---
+import Schematic from "./Schematic.astro";
+
+const { item } = Astro.props;
+const hasLink = Boolean(item.url);
+const Tag = hasLink ? "a" : "div";
+const linkProps = hasLink
+  ? { href: item.url, target: "_blank", rel: "noopener" }
+  : {};
+---
+
+<Tag class="case" {...linkProps}>
+  <div class="case-ref">
+    <b>{item.no}</b>
+    <span>{item.year}</span>
+  </div>
+
+  <div class="case-main">
+    <h3 class="case-title">
+      {item.title}
+      {hasLink && <span class="arrow" aria-hidden="true">↗</span>}
+    </h3>
+    <p class="case-desc">{item.desc}</p>
+    <ul class="tags">
+      {item.tags.map((t) => <li>{t}</li>)}
+    </ul>
+  </div>
+
+  <div class="case-aside">
+    {item.shot ? (
+      <img class="case-shot" src={item.shot} alt={`${item.title} — screenshot`} loading="lazy" width="170" height="104" />
+    ) : (
+      <Schematic kind={item.schematic} label={`${item.title} — wireframe`} />
+    )}
+    <div class="case-status">
+      <span>Status</span>
+      <b>{item.status}</b>
+    </div>
+  </div>
+</Tag>
